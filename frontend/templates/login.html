@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Giriş</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="center">
+  <div class="card">
+    <h1>Giriş</h1>
+    <form id="loginForm">
+      <label>Kullanıcı Adı</label>
+      <input name="username" required />
+      <label>Şifre</label>
+      <input name="password" type="password" required />
+      <button type="submit">Giriş Yap</button>
+    </form>
+    <p>Hesabın yok mu? <a href="/register">Kayıt ol</a></p>
+  </div>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kayıt</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="center">
+  <div class="card">
+    <h1>Kayıt</h1>
+    <form id="registerForm">
+      <label>Kullanıcı Adı</label>
+      <input name="username" required minlength="3" />
+      <label>Şifre</label>
+      <input name="password" type="password" required minlength="6" />
+      <label>Görünen İsim (opsiyonel)</label>
+      <input name="display_name" />
+      <button type="submit">Hesap Oluştur</button>
+    </form>
+    <p>Hesabın var mı? <a href="/login">Giriş yap</a></p>
+  </div>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

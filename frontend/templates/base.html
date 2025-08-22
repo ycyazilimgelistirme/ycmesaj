@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "WhatsApp Clone" }}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">WhatsApp Clone</div>
+    <nav>
+      <a href="/chat">Sohbet</a>
+      <a href="/call">Görüntülü Arama</a>
+      <a href="/login" id="logoutBtn">Çıkış</a>
+    </nav>
+  </header>
+  <main class="container">
+    <!-- içerik -->
+    {{ content | safe }}
+  </main>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>
