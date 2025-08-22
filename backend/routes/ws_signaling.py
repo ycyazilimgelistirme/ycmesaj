@@ -8,7 +8,12 @@ from ..ws.manager import manager
 router = APIRouter()
 
 @router.websocket("/ws/signaling")
-async def signaling_ws(websocket: WebSocket, token: str = Query(...), room: str = Query(...), db: Session = Depends(get_db)):
+async def signaling_ws(
+    websocket: WebSocket,
+    token: str = Query(...),
+    room: str = Query(...),
+    db: Session = Depends(get_db)
+):
     username = decode_token(token)
     if not username:
         await websocket.close(code=4401)
@@ -23,8 +28,13 @@ async def signaling_ws(websocket: WebSocket, token: str = Query(...), room: str 
 
     try:
         while True:
-            msg = await websocket.receive_json()
-            # Gelen SDP offer/answer/candidate paketini odadaki diğer herkese ilet
-            await manager.broadcast_room(room, {"type": "signal", "from": user.username, "data": msg})
+            data = await websocket.receive_json()
+            # Oda içindeki diğer katılımcılara ilet (gönderene geri gönderme!)
+            for ws in list(manager.rooms.get(room, [])):
+                if ws is not websocket:
+                    try:
+                        await ws.send_json({"type": "signal", "from": user.username, "data": data})
+                    except Exception:
+                        manager.rooms[room].discard(ws)
     except WebSocketDisconnect:
         manager.disconnect_user(user.id, websocket)
